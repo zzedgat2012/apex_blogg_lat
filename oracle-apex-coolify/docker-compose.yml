@@ -1,0 +1,34 @@
+services:
+  oracle-apex:
+    image: container-registry.oracle.com/database/free:latest
+    container_name: 23cfree
+    environment:
+      - ORACLE_PWD
+      - SERVICE_FQDN_APEX
+    ports:
+      - "8521:1521"
+      - "8500:5500"
+      - "8023:8080"
+      - "9043:8443"
+      - "9922:22"
+    volumes:
+      - ./scripts:/opt/oracle/scripts/startup
+      - ./data:/opt/oracle/data
+      - ./logs:/opt/oracle/logs
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:8080/ords/"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.apex.rule=Host(`apex.blogg.lat`)"
+      - "traefik.http.routers.apex.entrypoints=websecure"
+      - "traefik.http.routers.apex.tls.certresolver=letsencrypt"
+      - "traefik.http.services.apex.loadbalancer.server.port=8080"
+      - "traefik.http.routers.apex.service=apex"
+
+networks:
+  default:
+    external:
+      name: traefik
