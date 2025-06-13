@@ -12,7 +12,8 @@ services:
       - "9043:8443"
       - "9922:22"
     volumes:
-      - ${PWD}/scripts:/opt/oracle/scripts/startup
+      - ${PWD}/scripts/00_start_apex_ords_installer.sh:/opt/oracle/scripts/startup/00_start_apex_ords_installer.sh
+      - ${PWD}/scripts/unattended_apex_install_23c.sh:/home/oracle/unattended_apex_install_23c.sh
       - ${PWD}/data:/opt/oracle/data
       - ${PWD}/logs:/opt/oracle/logs
     healthcheck:
