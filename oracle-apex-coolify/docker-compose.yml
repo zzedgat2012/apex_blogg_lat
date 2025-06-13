@@ -12,9 +12,9 @@ services:
       - "9043:8443"
       - "9922:22"
     volumes:
-      - ${PWD}/scripts:/opt/oracle/scripts/startup
-      - ${PWD}/data:/opt/oracle/data
-      - ${PWD}/logs:/opt/oracle/logs
+      - ./scripts:/opt/oracle/scripts/startup
+      - ./data:/opt/oracle/data
+      - ./logs:/opt/oracle/logs
     healthcheck:
       test: ["CMD", "curl", "-f", "http://127.0.0.1:8080/ords/"]
       interval: 30s
