@@ -2,7 +2,7 @@
 
 # Start the ORDS service
 su - <<EOF
-sh /home/oracle/scripts/start_ords.sh
+sh /opt/oracle/scripts/startup/unattended_apex_install_23c.sh > /home/oracle/unattended_apex_install_23c.log
 EOF
 
 # Health check for ORDS
