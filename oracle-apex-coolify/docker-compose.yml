@@ -27,8 +27,3 @@ services:
       - "traefik.http.routers.apex.tls.certresolver=letsencrypt"
       - "traefik.http.services.apex.loadbalancer.server.port=8080"
       - "traefik.http.routers.apex.service=apex"
-
-networks:
-  default:
-    external:
-      name: traefik
